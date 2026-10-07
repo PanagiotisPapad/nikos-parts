@@ -7,6 +7,8 @@ export const site = {
   email: "chachopoulosn@gmail.com",
   carGrParts: "https://nikos-alfa-romeo-parts.car.gr/parts/",
   carGrShop: "https://nikos-alfa-romeo-parts.car.gr/",
+  /** Seller id on car.gr. Make filters stay scoped to this shop. */
+  carGrSellerId: "1002486277",
   whatsapp: "https://wa.me/306989868665",
   address: {
     street: "Μεσολογγίου 3",

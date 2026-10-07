@@ -75,10 +75,10 @@ export default async function ModelPage(props: PageProps<"/alfa-romeo/[slug]">) 
             Η παραλαβή γίνεται από τη Μεσολογγίου 3 στην Καλαμαριά. Για να
             δείτε τι είναι διαθέσιμο αυτή τη στιγμή, ανοίξτε τον{" "}
             <Link
-              href="/antallaktika"
+              href="/alfa-romeo#diathesima"
               className="font-semibold text-rosso underline-offset-2 hover:underline"
             >
-              κατάλογο ανταλλακτικών
+              κατάλογο Alfa Romeo
             </Link>
             .
           </p>

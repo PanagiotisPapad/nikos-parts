@@ -6,14 +6,18 @@ import {
   WebPageJsonLd,
 } from "@/components/json-ld";
 import { CtaBand } from "@/components/cta-band";
+import { MakeCatalog } from "@/components/make-catalog";
 import { PageHeader } from "@/components/page-header";
+import { getCatalogMake } from "@/lib/makes";
 import { pageMetadata } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 import { alfaModels, modelImages } from "@/lib/models";
 
-const title = "Μοντέλα Alfa Romeo — ανταλλακτικά Θεσσαλονίκη";
+const alfa = getCatalogMake("alfa-romeo");
+
+const title = "Ανταλλακτικά Alfa Romeo Θεσσαλονίκη";
 const description =
-  "Σελίδες για μεταχειρισμένα ανταλλακτικά Alfa Romeo MiTo, Giulietta, 159, 147, 156, Giulia, Stelvio και άλλα στη Θεσσαλονίκη. Κατάλογος και τηλ. 698 986 8665.";
+  "Ζωντανός κατάλογος μεταχειρισμένων ανταλλακτικών Alfa Romeo στη Θεσσαλονίκη, από τις αγγελίες car.gr. MiTo, Giulietta, 159, Giulia και άλλα. Τηλ. 698 986 8665.";
 
 export const metadata = pageMetadata({
   title,
@@ -46,12 +50,20 @@ export default function ModelsPage() {
       <PageHeader
         breadcrumbs={breadcrumbs}
         eyebrow="Alfa Romeo"
-        title="Μεταχειρισμένα ανταλλακτικά ανά μοντέλο"
-        lede="Διαλέξτε το Alfa σας για να δείτε τι χρειάζεται να πείτε στο τηλέφωνο. Η διαθεσιμότητα ελέγχεται στον κατάλογο, όχι σε αυτή τη λίστα."
+        title="Μεταχειρισμένα ανταλλακτικά Alfa Romeo στη Θεσσαλονίκη"
+        lede="Οι διαθέσιμες αγγελίες Alfa Romeo φορτώνονται από το car.gr και αλλάζουν μόνες τους με το στοκ. Από κάτω, κάθε μοντέλο εξηγεί τι να πείτε στο τηλέφωνο."
         image="/images/car-giulia.jpg"
         imageAlt="Alfa Romeo Giulia σεντάν"
       />
-      <ul className="container-page grid gap-5 py-10 sm:grid-cols-2">
+      <MakeCatalog make={alfa} />
+      <section className="border-t border-border bg-surface-muted">
+        <div className="container-page py-10">
+          <h2 className="text-3xl">Ανά μοντέλο</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-muted">
+            Οι σελίδες μοντέλων εξηγούν τι να πείτε στο τηλέφωνο. Η
+            διαθεσιμότητα είναι ο κατάλογος από πάνω.
+          </p>
+          <ul className="mt-8 grid gap-5 sm:grid-cols-2">
         {alfaModels.map((model) => (
           <li key={model.slug}>
             <Link
@@ -67,7 +79,7 @@ export default function ModelsPage() {
                   className="object-cover md:rounded-l-xl"
                 />
               </span>
-              <span className="flex flex-col p-5">
+              <div className="flex flex-col p-5">
                 <h2 className="text-2xl group-hover:text-rosso md:text-3xl">
                   Alfa Romeo {model.name}
                 </h2>
@@ -77,11 +89,13 @@ export default function ModelsPage() {
                 <p className="mt-3 text-sm leading-relaxed text-ink-muted">
                   {model.intro}
                 </p>
-              </span>
+              </div>
             </Link>
           </li>
         ))}
-      </ul>
+          </ul>
+        </div>
+      </section>
       <CtaBand />
     </main>
   );

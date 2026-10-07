@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Source_Serif_4 } from "next/font/google";
 import { SiteGraphJsonLd } from "@/components/json-ld";
-import { MobileCallBar } from "@/components/mobile-call-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeaderShell } from "@/components/site-header-shell";
 import { OG_DEFAULT } from "@/lib/seo";
@@ -79,7 +78,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body
-        className="flex min-h-full flex-col pb-16 md:pb-0"
+        className="flex min-h-full flex-col"
         suppressHydrationWarning
       >
         <SiteGraphJsonLd />
@@ -94,7 +93,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </div>
         <SiteFooter />
-        <MobileCallBar />
       </body>
     </html>
   );

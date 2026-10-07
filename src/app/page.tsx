@@ -187,9 +187,15 @@ export default function Home() {
                     ) : (
                       <Link
                         className="text-ink-muted underline-offset-2 hover:text-rosso hover:underline"
-                        href="/fiat-lancia"
+                        href={
+                          part.title.toLowerCase().includes("lancia")
+                            ? "/lancia"
+                            : "/fiat"
+                        }
                       >
-                        Fiat / Lancia
+                        {part.title.toLowerCase().includes("lancia")
+                          ? "Lancia"
+                          : "Fiat"}
                       </Link>
                     )}
                   </p>
@@ -230,7 +236,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="Alfa Romeo"
             title="Ανταλλακτικά ανά μοντέλο"
-            description="Κάθε σελίδα εξηγεί τι να ζητήσετε στο τηλέφωνο. Η διαθεσιμότητα ελέγχεται μόνο στον κατάλογο."
+            description="Κάθε σελίδα εξηγεί τι να ζητήσετε στο τηλέφωνο. Τα διαθέσιμα κομμάτια είναι στον κατάλογο Alfa Romeo."
             action={{ href: "/alfa-romeo", label: "Όλα τα μοντέλα →" }}
           />
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -272,14 +278,21 @@ export default function Home() {
           <div className="rounded-xl border border-border bg-surface p-8 shadow-[var(--shadow-card)]">
             <h2 className="text-2xl">Τι περιλαμβάνει ο κατάλογος</h2>
             <p className="prose-body mt-4">
-              Φανοποιία, μηχανικά και ηλεκτρικά για Alfa Romeo, μαζί με
-              επιλεγμένα Fiat και Lancia. Οι τιμές είναι αυτές του car.gr —
-              χωρίς «κρυφές» προσφορές. Αν μια αγγελία φύγει, το κομμάτι έχει
-              πουληθεί.
+              Φανοποιία, μηχανικά και ηλεκτρικά για Alfa Romeo, μαζί με Fiat
+              και Lancia. Οι τιμές είναι αυτές του car.gr — χωρίς «κρυφές»
+              προσφορές. Αν μια αγγελία φύγει, το κομμάτι έχει πουληθεί.
             </p>
-            <Link href="/antallaktika" className="btn btn-primary mt-6">
-              Άνοιγμα καταλόγου
-            </Link>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/alfa-romeo" className="btn btn-primary">
+                Alfa Romeo
+              </Link>
+              <Link href="/fiat" className="btn btn-secondary">
+                Fiat
+              </Link>
+              <Link href="/lancia" className="btn btn-secondary">
+                Lancia
+              </Link>
+            </div>
           </div>
           <div className="rounded-xl border border-rosso/20 bg-rosso/[0.04] p-8">
             <h2 className="text-2xl">Πριν καλέσετε</h2>

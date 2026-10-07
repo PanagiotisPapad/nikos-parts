@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 
 const title = "Ανταλλακτικά Fiat και Lancia Θεσσαλονίκη";
 const description =
-  "Μεταχειρισμένα ανταλλακτικά Fiat και Lancia από τον Nikos στην Καλαμαριά. Ίδιος κατάλογος car.gr με Alfa Romeo. Τηλ. 698 986 8665.";
+  "Μεταχειρισμένα ανταλλακτικά Fiat και Lancia από τον Nikos στην Καλαμαριά. Ξεχωριστοί ζωντανοί κατάλογοι από το car.gr. Τηλ. 698 986 8665.";
 
 export const metadata = pageMetadata({
   title,
@@ -15,13 +15,26 @@ export const metadata = pageMetadata({
   path: "/fiat-lancia",
   ogImage: {
     url: "/images/part-panda-radio.jpg",
-    alt: "Ραδιόφωνο Fiat Panda — ανταλλακτικά Fiat Lancia Θεσσαλονίκη",
+    alt: "Ραδιόφωνο Fiat Panda — ανταλλακτικά Fiat και Lancia Θεσσαλονίκη",
   },
 });
 
 const breadcrumbs = [
   { name: "Αρχική", path: "/" },
   { name: "Fiat και Lancia", path: "/fiat-lancia" },
+];
+
+const brands = [
+  {
+    href: "/fiat",
+    name: "Fiat",
+    text: "Αγγελίες Fiat του καταστήματος, όπως ανεβαίνουν στο car.gr.",
+  },
+  {
+    href: "/lancia",
+    name: "Lancia",
+    text: "Αγγελίες Lancia του καταστήματος, όπως ανεβαίνουν στο car.gr.",
+  },
 ];
 
 export default function FiatLanciaPage() {
@@ -31,28 +44,33 @@ export default function FiatLanciaPage() {
       <BreadcrumbJsonLd items={breadcrumbs} />
       <PageHeader
         breadcrumbs={breadcrumbs}
-        eyebrow="Εκτός Alfa Romeo"
+        eyebrow="Fiat και Lancia"
         title="Μεταχειρισμένα ανταλλακτικά Fiat και Lancia"
-        lede="Το βάρος του καταστήματος είναι η Alfa Romeo. Στον ίδιο κατάλογο ανεβαίνουν και κομμάτια Fiat και Lancia, όταν υπάρχουν στην αποθήκη."
+        lede="Το βάρος του καταστήματος είναι η Alfa Romeo. Fiat και Lancia έχουν δικό τους ζωντανό κατάλογο, από τις ίδιες αγγελίες στο car.gr."
         image="/images/part-panda-radio.jpg"
-        imageAlt="Ραδιόφωνο CD Fiat Panda 2012–2020 από τον κατάλογο"
+        imageAlt="Ραδιόφωνο CD Fiat Panda από τον κατάλογο"
       />
-      <div className="container-page max-w-3xl space-y-5 py-10 prose-body">
-        <p>
-          Δεν κρατάμε ξεχωριστή λίστα Fiat εκτός car.gr. Αν ψάχνετε ραδιόφωνο,
-          πόρτα, φανάρι ή μηχανικό για Fiat ή Lancia, κοιτάξτε πρώτα τον
-          κατάλογο και μετά καλέστε με μοντέλο και έτος. Έχει εμφανιστεί, για
-          παράδειγμα, ραδιόφωνο Fiat Panda 2012–2020. Τέτοιες αγγελίες μένουν
-          online μόνο όσο το κομμάτι δεν έχει πουληθεί.
+      <div className="container-page max-w-3xl space-y-5 py-10">
+        <p className="prose-body">
+          Δεν κρατάμε ξεχωριστή λίστα εκτός car.gr. Ανοίξτε τη μάρκα που σας
+          ενδιαφέρει. Αν το κομμάτι πουληθεί, φεύγει από τον κατάλογο.
         </p>
-        <p>
-          Πείτε μας τον εργοστασιακό κωδικό αν τον έχετε. Πολλά ηλεκτρικά Fiat
-          της ίδιας γενιάς μοιάζουν και δεν ταιριάζουν μεταξύ τους.
-        </p>
+        <ul className="grid gap-4 sm:grid-cols-2">
+          {brands.map((brand) => (
+            <li key={brand.href}>
+              <Link href={brand.href} className="card block h-full p-6">
+                <h2 className="text-2xl">{brand.name}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                  {brand.text}
+                </p>
+                <p className="mt-4 text-sm font-semibold text-rosso">
+                  Κατάλογος {brand.name} →
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
         <p className="flex flex-wrap gap-4 pt-2">
-          <Link href="/antallaktika" className="btn btn-primary">
-            Κατάλογος ανταλλακτικών
-          </Link>
           <a className="btn btn-secondary" href={`tel:${site.phoneTel}`}>
             {site.phoneDisplay}
           </a>

@@ -1,4 +1,5 @@
 import { CatalogFrame } from "@/components/catalog-frame";
+import { MakeSwitcher } from "@/components/make-catalog";
 import { BreadcrumbJsonLd, WebPageJsonLd } from "@/components/json-ld";
 import { CtaBand } from "@/components/cta-band";
 import { PageHeader } from "@/components/page-header";
@@ -14,8 +15,8 @@ export const metadata = pageMetadata({
   description,
   path: "/antallaktika",
   ogImage: {
-    url: "/images/part-lancia-lights.jpg",
-    alt: "Φανάρια Lancia Musa — κατάλογος ανταλλακτικών Nikos",
+    url: "/images/part-mito-wheels.jpg",
+    alt: "Ζάντα Alfa Romeo MiTo — κατάλογος ανταλλακτικών Nikos",
   },
 });
 
@@ -34,8 +35,8 @@ export default function PartsPage() {
         eyebrow="Κατάλογος"
         title="Ανταλλακτικά Alfa Romeo στη Θεσσαλονίκη"
         lede="Οι αγγελίες ενημερώνονται στο car.gr και εμφανίζονται εδώ. Ανοίξτε ένα κομμάτι για τιμή και φωτογραφίες, ή καλέστε αν αυτό που θέλετε δεν είναι στη λίστα."
-        image="/images/part-lancia-lights.jpg"
-        imageAlt="Φανάρια εμπρός Lancia Musa από τον κατάλογο"
+        image="/images/part-mito-wheels.jpg"
+        imageAlt="Ζάντα Alfa Romeo MiTo από τον κατάλογο"
       />
       <div className="container-page py-8 max-md:py-4">
         <div className="mb-6 rounded-xl border border-border bg-surface p-5 text-sm leading-relaxed text-ink-muted shadow-[var(--shadow-card)] max-md:mb-4 max-md:p-3 max-md:text-xs">
@@ -47,8 +48,8 @@ export default function PartsPage() {
             >
               {site.phoneDisplay}
             </a>
-            . Ο κατάλογος περιλαμβάνει Alfa Romeo και, όταν υπάρχουν, Fiat και
-            Lancia.{" "}
+            . Ο κατάλογος περιλαμβάνει Alfa Romeo, Fiat και Lancia. Για μία
+            μάρκα, διαλέξτε φίλτρο από κάτω.{" "}
             <a
               className="font-semibold text-ink underline-offset-2 hover:underline"
               href={site.carGrParts}
@@ -58,6 +59,7 @@ export default function PartsPage() {
             .
           </p>
         </div>
+        <MakeSwitcher />
         <CatalogFrame />
       </div>
       <CtaBand />

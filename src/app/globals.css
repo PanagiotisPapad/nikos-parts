@@ -41,6 +41,27 @@ h3 {
   letter-spacing: -0.02em;
 }
 
+@keyframes menu-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.menu-link {
+  animation: menu-rise 0.42s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-link {
+    animation: none;
+  }
+}
+
 @layer components {
   .container-page {
     @apply mx-auto max-w-6xl px-4;

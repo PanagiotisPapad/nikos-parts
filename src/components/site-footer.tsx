@@ -45,12 +45,17 @@ export function SiteFooter() {
             </li>
             <li>
               <Link className="hover:text-white hover:underline" href="/alfa-romeo">
-                Μοντέλα Alfa Romeo
+                Ανταλλακτικά Alfa Romeo
               </Link>
             </li>
             <li>
-              <Link className="hover:text-white hover:underline" href="/fiat-lancia">
-                Fiat &amp; Lancia
+              <Link className="hover:text-white hover:underline" href="/fiat">
+                Ανταλλακτικά Fiat
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:text-white hover:underline" href="/lancia">
+                Ανταλλακτικά Lancia
               </Link>
             </li>
             <li>

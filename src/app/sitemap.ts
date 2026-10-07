@@ -13,9 +13,11 @@ type SitemapEntry = {
 const staticEntries: SitemapEntry[] = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/antallaktika", changeFrequency: "daily", priority: 0.95 },
-  { path: "/alfa-romeo", changeFrequency: "weekly", priority: 0.9 },
-  { path: "/epikoinonia", changeFrequency: "monthly", priority: 0.85 },
-  { path: "/fiat-lancia", changeFrequency: "monthly", priority: 0.75 },
+  { path: "/alfa-romeo", changeFrequency: "daily", priority: 0.9 },
+  { path: "/fiat", changeFrequency: "daily", priority: 0.85 },
+  { path: "/lancia", changeFrequency: "daily", priority: 0.85 },
+  { path: "/epikoinonia", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/fiat-lancia", changeFrequency: "monthly", priority: 0.6 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
