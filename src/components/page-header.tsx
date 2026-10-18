@@ -25,9 +25,7 @@ export function PageHeader({
       >
         <div>
           {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
-          <p className="text-xs font-semibold tracking-[0.16em] text-rosso uppercase">
-            {eyebrow}
-          </p>
+          <p className="text-sm text-ink-muted">{eyebrow}</p>
           <h1 className="mt-3 max-w-3xl text-4xl leading-[1.12] text-ink md:text-5xl">
             {title}
           </h1>
@@ -36,7 +34,7 @@ export function PageHeader({
           </p>
         </div>
         {image ? (
-          <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-charcoal shadow-[var(--shadow-card)]">
+          <div className="relative aspect-[16/10] overflow-hidden bg-charcoal">
             <Image
               src={image}
               alt={imageAlt ?? ""}

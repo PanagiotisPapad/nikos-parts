@@ -6,9 +6,9 @@ import { PageHeader } from "@/components/page-header";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-const title = "Κατάλογος ανταλλακτικών Alfa Romeo Θεσσαλονίκη";
+const title = "Κατάλογος ανταλλακτικών Θεσσαλονίκη";
 const description =
-  "Ζωντανός κατάλογος μεταχειρισμένων ανταλλακτικών Alfa Romeo στη Θεσσαλονίκη. Αγγελίες car.gr, παραλαβή Καλαμαριά Μεσολογγίου 3. Τηλ. 698 986 8665.";
+  "Ζωντανός κατάλογος μεταχειρισμένων ανταλλακτικών Alfa Romeo, Fiat και Lancia στη Θεσσαλονίκη. Αγγελίες car.gr, παραλαβή Καλαμαριά Μεσολογγίου 3. Τηλ. 698 986 8665.";
 
 export const metadata = pageMetadata({
   title,
@@ -33,8 +33,8 @@ export default function PartsPage() {
       <PageHeader
         breadcrumbs={breadcrumbs}
         eyebrow="Κατάλογος"
-        title="Ανταλλακτικά Alfa Romeo στη Θεσσαλονίκη"
-        lede="Οι αγγελίες ενημερώνονται στο car.gr και εμφανίζονται εδώ. Ανοίξτε ένα κομμάτι για τιμή και φωτογραφίες, ή καλέστε αν αυτό που θέλετε δεν είναι στη λίστα."
+        title="Ανταλλακτικά Alfa Romeo, Fiat και Lancia"
+        lede="Οι αγγελίες και των τριών μαρκών ενημερώνονται στο car.gr και εμφανίζονται εδώ. Ανοίξτε ένα κομμάτι για τιμή και φωτογραφίες, ή καλέστε αν αυτό που θέλετε δεν είναι στη λίστα."
         image="/images/part-mito-wheels.jpg"
         imageAlt="Ζάντα Alfa Romeo MiTo από τον κατάλογο"
       />

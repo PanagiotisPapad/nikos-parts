@@ -7,11 +7,14 @@ export function SiteFooter() {
     <footer className="mt-auto border-t border-border bg-charcoal text-cream">
       <div className="container-page grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
-          <p className="font-serif text-2xl">Nikos Alfa Romeo Parts</p>
+          <p className="font-display text-4xl font-extrabold tracking-tight">
+            Nikos
+          </p>
+          <p className="mt-1 text-sm text-cream/70">Alfa Parts</p>
           <p className="mt-3 max-w-md text-sm leading-relaxed text-cream/75">
-            Εξειδικευμένο κατάστημα μεταχειρισμένων ανταλλακτικών Alfa Romeo
-            στην Καλαμαριά, Θεσσαλονίκη. Ζωντανός κατάλογος στο car.gr,
-            παραλαβή από το κατάστημα και τηλεφωνική εξυπηρέτηση.
+            Μεταχειρισμένα ανταλλακτικά Alfa Romeo, Fiat και Lancia στην
+            Καλαμαριά, Θεσσαλονίκη. Ζωντανός κατάλογος στο car.gr, παραλαβή
+            από το κατάστημα και τηλεφωνική εξυπηρέτηση.
           </p>
         </div>
         <address className="text-sm leading-7 not-italic">
@@ -73,8 +76,8 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-white/10">
         <p className="container-page py-4 text-xs text-cream/55">
-          Ανταλλακτικά Alfa Romeo Θεσσαλονίκη · Καλαμαριά · MiTo · Giulietta ·
-          159 · 147 · 156 · Giulia · Stelvio
+          Ανταλλακτικά Alfa Romeo, Fiat και Lancia. Θεσσαλονίκη, Καλαμαριά.
+          MiTo, Giulietta, 159, 147, 156, Giulia, Stelvio
         </p>
         <ul className="container-page flex flex-wrap gap-x-3 gap-y-2 pb-6 text-xs text-cream/60">
           {alfaModels.map((model) => (

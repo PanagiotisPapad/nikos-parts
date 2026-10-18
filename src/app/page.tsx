@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { CtaBand } from "@/components/cta-band";
 import { FaqJsonLd, ItemListJsonLd, WebPageJsonLd } from "@/components/json-ld";
-import { SectionHeading } from "@/components/section-heading";
 import { homeFaq } from "@/lib/faq";
 import { absoluteTitle, pageMetadata } from "@/lib/seo";
 import {
@@ -14,7 +13,7 @@ import {
   site,
 } from "@/lib/site";
 import { alfaModels, modelImages } from "@/lib/models";
-import { featuredParts } from "@/lib/parts";
+import { featuredParts, type CatalogPart } from "@/lib/parts";
 
 export const metadata: Metadata = {
   ...pageMetadata({
@@ -25,38 +24,64 @@ export const metadata: Metadata = {
   title: absoluteTitle(homeTitleAbsolute),
 };
 
-const steps = [
+const catalogAction = "Ανοίξτε τον κατάλογο";
+
+const doors = [
   {
-    n: "1",
-    title: "Κατάλογος online",
-    text: "Δείτε τις αγγελίες στο car.gr, ενσωματωμένες στη σελίδα ανταλλακτικών. Ό,τι εμφανίζεται είναι διαθέσιμο.",
+    title: "Κατάλογος",
+    text: "Τιμές και φωτογραφίες από το car.gr. Ό,τι φαίνεται είναι διαθέσιμο.",
+    href: "/antallaktika",
   },
   {
-    n: "2",
-    title: "Κλήση ή μήνυμα",
-    text: "Δεν το βρίσκετε; Καλέστε με μοντέλο, έτος, κινητήρα και εργοστασιακό κωδικό αν τον έχετε.",
+    title: "Μοντέλα Alfa",
+    text: "MiTo, Giulietta, 159, Giulia και τα υπόλοιπα. Τι να πείτε στο τηλέφωνο.",
+    href: "/alfa-romeo",
   },
   {
-    n: "3",
-    title: "Παραλαβή Καλαμαριά",
-    text: "Το κατάστημα είναι στη Μεσολογγίου 3. Για αποστολή, ρωτήστε τηλεφωνικά πριν κλείσετε το κομμάτι.",
+    title: "Κατάστημα",
+    text: "Μεσολογγίου 3, Καλαμαριά. Παραλαβή κατόπιν συνεννόησης.",
+    href: "/epikoinonia",
   },
 ];
 
-const highlights = [
+const steps = [
   {
-    title: "Εξειδίκευση Alfa Romeo",
-    text: "MiTo, Giulietta, 159, 147, 156, Giulia, Stelvio — με σελίδες ανά μοντέλο για γρήγορη αναζήτηση.",
+    n: "1",
+    title: catalogAction,
+    text: "Οι αγγελίες στο car.gr εμφανίζονται στη σελίδα ανταλλακτικών. Ό,τι βλέπετε υπάρχει.",
+    href: "/antallaktika",
+    action: catalogAction,
   },
   {
-    title: "Ζωντανός κατάλογος",
-    text: "Τιμές και φωτογραφίες από το car.gr. Χωρίς «κρυφή» διαθεσιμότητα: αν λείπει η αγγελία, έχει πουληθεί.",
+    n: "2",
+    title: "Καλέστε αν λείπει",
+    text: "Πείτε μοντέλο, έτος, κινητήρα και εργοστασιακό κωδικό, αν τον έχετε.",
+    href: `tel:${site.phoneTel}`,
+    action: site.phoneDisplay,
   },
   {
-    title: "Τοπικό κατάστημα",
-    text: "Παραλαβή από Καλαμαριά, Θεσσαλονίκη. Τηλεφωνική εξυπηρέτηση και WhatsApp για ερωτήσεις.",
+    n: "3",
+    title: "Παραλαβή στην Καλαμαριά",
+    text: "Το κατάστημα είναι στη Μεσολογγίου 3. Για αποστολή, ρωτήστε πριν κλείσετε το κομμάτι.",
+    href: "/epikoinonia",
+    action: "Διεύθυνση και χάρτης",
   },
 ];
+
+function partContext(part: CatalogPart) {
+  if (part.models[0]) {
+    const model = alfaModels.find((item) => item.slug === part.models[0]);
+    return {
+      href: `/alfa-romeo/${part.models[0]}`,
+      label: model ? `Alfa ${model.name}` : "Alfa Romeo",
+    };
+  }
+  const isLancia = part.title.toLowerCase().includes("lancia");
+  return {
+    href: isLancia ? "/lancia" : "/fiat",
+    label: isLancia ? "Lancia" : "Fiat",
+  };
+}
 
 export default function Home() {
   return (
@@ -68,7 +93,7 @@ export default function Home() {
       />
       <FaqJsonLd items={homeFaq} />
       <ItemListJsonLd
-        name="Δείγματα ανταλλακτικών Alfa Romeo από τον κατάλογο"
+        name="Δείγματα από τον κατάλογο ανταλλακτικών"
         items={featuredParts.map((part) => ({
           name: part.title,
           url: part.href,
@@ -84,146 +109,198 @@ export default function Home() {
         }))}
       />
 
-      <section className="relative isolate min-h-[min(92vh,760px)] overflow-hidden border-b border-charcoal">
-        <Image
-          src="/images/car-giulia.jpg"
-          alt="Alfa Romeo Giulia — μεταχειρισμένα ανταλλακτικά Θεσσαλονίκη"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[72%_center]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/92 to-charcoal/25" />
-        <div className="relative container-page flex min-h-[min(92vh,760px)] flex-col justify-end py-12 md:justify-center md:py-16">
-          <div className="flex flex-wrap gap-2">
-            <span className="badge border-cream/20 bg-charcoal/40 text-cream">
-              Καλαμαριά · Θεσσαλονίκη
-            </span>
-            <span className="badge border-cream/20 bg-charcoal/40 text-cream">
-              Μεταχειρισμένα ανταλλακτικά
-            </span>
+      <section className="scroll-mt-24 border-b border-border bg-surface-muted">
+        <div className="container-page grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-stretch">
+          <div className="flex flex-col justify-end py-10 md:py-16 lg:py-20 lg:pr-10">
+            <p className="text-sm text-ink-muted">
+              Μεσολογγίου 3, Καλαμαριά
+            </p>
+            <h1 className="mt-4 font-display text-[clamp(2.75rem,8.5vw,6.25rem)] font-extrabold leading-[0.82] tracking-[-0.045em] text-ink">
+              <span className="block">Ανταλλακτικά</span>
+              <span className="block">Alfa Romeo</span>
+              <span className="block">Fiat, Lancia</span>
+            </h1>
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-muted">
+              Μεταχειρισμένα κομμάτια από το κατάστημα στη Θεσσαλονίκη. Ο
+              κατάλογος είναι οι αγγελίες στο car.gr — ό,τι φαίνεται, υπάρχει.
+            </p>
+            <nav aria-label="Μάρκες" className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+              <Link
+                href="/alfa-romeo"
+                className="font-display text-2xl font-bold tracking-tight hover:text-rosso"
+              >
+                Alfa Romeo
+              </Link>
+              <Link
+                href="/fiat"
+                className="font-display text-2xl font-bold tracking-tight hover:text-rosso"
+              >
+                Fiat
+              </Link>
+              <Link
+                href="/lancia"
+                className="font-display text-2xl font-bold tracking-tight hover:text-rosso"
+              >
+                Lancia
+              </Link>
+            </nav>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/antallaktika" className="btn btn-primary">
+                {catalogAction}
+              </Link>
+              <a href={`tel:${site.phoneTel}`} className="btn btn-secondary">
+                {site.phoneDisplay}
+              </a>
+            </div>
+            <p className="mt-4 max-w-lg text-sm leading-relaxed text-ink-muted">
+              Στον κατάλογο βλέπετε ό,τι υπάρχει τώρα. Αν λείπει, καλέστε με
+              μοντέλο, έτος και κινητήρα, ή{" "}
+              <a
+                href={site.whatsapp}
+                className="font-semibold text-ink underline-offset-2 hover:text-rosso hover:underline"
+              >
+                στείλτε στο WhatsApp
+              </a>
+              .
+            </p>
           </div>
-          <h1 className="mt-5 max-w-2xl text-4xl leading-[1.08] text-cream md:text-5xl lg:text-6xl">
-            Ανταλλακτικά Alfa Romeo στη Θεσσαλονίκη
-          </h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-cream/90">
-            Ο Νίκος διαθέτει μεταχειρισμένα ανταλλακτικά Alfa Romeo από το
-            κατάστημα στη Μεσολογγίου 3. Δείτε τον κατάλογο online ή καλέστε
-            για συγκεκριμένο κομμάτι — Fiat και Lancia όταν υπάρχουν στην
-            αποθήκη.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/antallaktika" className="btn btn-primary">
-              Δείτε τον κατάλογο
-            </Link>
-            <a href={`tel:${site.phoneTel}`} className="btn btn-on-dark">
-              {site.phoneDisplay}
-            </a>
+          <div className="relative -mx-4 aspect-[16/10] border-t border-border lg:mx-0 lg:aspect-auto lg:min-h-[min(78vh,720px)] lg:border-t-0 lg:border-l">
+            <Image
+              src="/images/car-giulia.jpg"
+              alt="Alfa Romeo Giulia — μεταχειρισμένα ανταλλακτικά Θεσσαλονίκη"
+              fill
+              priority
+              sizes="(min-width: 1024px) 42vw, 100vw"
+              className="object-cover object-[72%_center]"
+            />
           </div>
         </div>
       </section>
 
-      <section className="border-b border-border bg-surface">
-        <div className="container-page grid gap-6 py-8 sm:grid-cols-3">
-          {highlights.map((item) => (
-            <div key={item.title} className="rounded-xl border border-border bg-surface-muted p-5">
-              <h2 className="text-xl text-ink">{item.title}</h2>
+      <section className="scroll-mt-24 border-b border-border bg-surface">
+        <div className="container-page grid sm:grid-cols-3 sm:gap-0">
+          {doors.map((item, index) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`block border-b border-border py-6 last:border-b-0 hover:text-rosso sm:border-b-0 sm:px-6 sm:py-8 ${index === 0 ? "sm:pl-0" : "sm:border-l sm:border-border"} ${index === doors.length - 1 ? "sm:pr-0" : ""}`}
+            >
+              <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">
+                {item.title}
+              </h2>
               <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                 {item.text}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
 
-      <section className="section-pad border-b border-border bg-surface">
+      <section className="section-pad scroll-mt-24 border-b border-border bg-surface">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="Από τον κατάλογο"
-            title="Δείγματα διαθέσιμων ανταλλακτικών"
-            description="Οι φωτογραφίες και οι τιμές προέρχονται από ενεργές αγγελίες στο car.gr."
-            action={{ href: "/antallaktika", label: "Όλος ο κατάλογος →" }}
-          />
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredParts.map((part) => (
-              <li key={part.href} className="card group">
-                <a href={part.href} className="block">
-                  <span className="relative block aspect-[4/3] bg-cream-muted">
-                    <Image
-                      src={part.src}
-                      alt={part.title}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                    />
-                  </span>
-                </a>
-                <div className="p-5">
-                  <h3 className="text-lg leading-snug">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="max-w-2xl">
+              <h2 className="text-4xl text-ink md:text-5xl">
+                Μερικά διαθέσιμα κομμάτια
+              </h2>
+              <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
+                Ενδεικτικά από τον κατάλογο. Η πλήρης λίστα αλλάζει με το στοκ
+                και ανοίγει στο car.gr.
+              </p>
+            </div>
+            <Link
+              href="/antallaktika"
+              className="text-sm font-semibold text-rosso underline decoration-rosso/40 underline-offset-4 hover:decoration-rosso"
+            >
+              {catalogAction}
+            </Link>
+          </div>
+          <ul className="mt-10 divide-y divide-border border-y border-border">
+            {featuredParts.map((part) => {
+              const context = partContext(part);
+              return (
+                <li key={part.href}>
+                  <div className="grid gap-4 py-5 sm:grid-cols-[8.5rem_minmax(0,1fr)_auto] sm:items-center">
                     <a
                       href={part.href}
-                      className="hover:text-rosso"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      tabIndex={-1}
+                      aria-hidden
+                      className="relative block aspect-[4/3] overflow-hidden bg-cream-muted sm:aspect-auto sm:h-24"
                     >
-                      {part.title}
+                      <Image
+                        src={part.src}
+                        alt=""
+                        fill
+                        sizes="136px"
+                        className="object-cover"
+                      />
                     </a>
-                  </h3>
-                  <p className="mt-2 text-sm font-medium text-rosso">
-                    {part.price}
-                  </p>
-                  <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-semibold">
-                    <a
-                      className="text-ink-muted underline-offset-2 hover:text-rosso hover:underline"
-                      href={part.href}
-                    >
-                      Αγγελία car.gr
-                    </a>
-                    {part.models[0] ? (
-                      <Link
-                        className="text-ink-muted underline-offset-2 hover:text-rosso hover:underline"
-                        href={`/alfa-romeo/${part.models[0]}`}
-                      >
-                        Alfa {alfaModels.find((m) => m.slug === part.models[0])?.name}
-                      </Link>
-                    ) : (
-                      <Link
-                        className="text-ink-muted underline-offset-2 hover:text-rosso hover:underline"
-                        href={
-                          part.title.toLowerCase().includes("lancia")
-                            ? "/lancia"
-                            : "/fiat"
-                        }
-                      >
-                        {part.title.toLowerCase().includes("lancia")
-                          ? "Lancia"
-                          : "Fiat"}
-                      </Link>
-                    )}
-                  </p>
-                </div>
-              </li>
-            ))}
+                    <div className="min-w-0">
+                      <h3 className="font-display text-2xl font-bold tracking-tight">
+                        <a
+                          href={part.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-rosso"
+                        >
+                          {part.title}
+                        </a>
+                      </h3>
+                      <p className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm font-semibold">
+                        <a
+                          className="text-ink-muted underline-offset-2 hover:text-rosso hover:underline"
+                          href={part.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Ανοίγει στο car.gr
+                        </a>
+                        <Link
+                          className="text-ink-muted underline-offset-2 hover:text-rosso hover:underline"
+                          href={context.href}
+                        >
+                          {context.label}
+                        </Link>
+                      </p>
+                    </div>
+                    <p className="font-display text-3xl font-bold tabular-nums tracking-tight text-rosso sm:text-right">
+                      {part.price}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
 
-      <section className="section-pad">
+      <section className="section-pad scroll-mt-24 border-b border-border">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="Διαδικασία"
-            title="Πώς βρίσκετε το κομμάτι που χρειάζεστε"
-          />
-          <ol className="mt-10 grid gap-5 md:grid-cols-3">
-            {steps.map((step) => (
+          <h2 className="text-4xl text-ink md:text-5xl">
+            Πώς βρίσκετε το κομμάτι
+          </h2>
+          <ol className="mt-10 grid gap-8 md:grid-cols-3 md:gap-0">
+            {steps.map((step, index) => (
               <li
                 key={step.n}
-                className="rounded-xl border border-border bg-surface p-6 shadow-[var(--shadow-card)]"
+                className={`md:px-8 ${index === 0 ? "md:pl-0" : "md:border-l md:border-border"} ${index === steps.length - 1 ? "md:pr-0" : ""}`}
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-rosso/10 text-sm font-bold text-rosso">
+                <p className="font-display text-6xl font-extrabold leading-none tracking-tight text-ink">
                   {step.n}
-                </span>
-                <h3 className="mt-4 text-xl">{step.title}</h3>
+                </p>
+                <h3 className="mt-4 text-2xl">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                   {step.text}
+                </p>
+                <p className="mt-4">
+                  <a
+                    href={step.href}
+                    className="text-sm font-semibold text-rosso underline decoration-rosso/40 underline-offset-4 hover:decoration-rosso"
+                  >
+                    {step.action}
+                  </a>
                 </p>
               </li>
             ))}
@@ -231,104 +308,112 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-pad border-y border-border bg-surface-muted">
+      <section
+        id="models"
+        className="section-pad scroll-mt-24 border-b border-border bg-surface"
+      >
         <div className="container-page">
-          <SectionHeading
-            eyebrow="Alfa Romeo"
-            title="Ανταλλακτικά ανά μοντέλο"
-            description="Κάθε σελίδα εξηγεί τι να ζητήσετε στο τηλέφωνο. Τα διαθέσιμα κομμάτια είναι στον κατάλογο Alfa Romeo."
-            action={{ href: "/alfa-romeo", label: "Όλα τα μοντέλα →" }}
-          />
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {alfaModels.map((model) => (
-              <li key={model.slug}>
-                <Link
-                  href={`/alfa-romeo/${model.slug}`}
-                  className="card group flex h-full flex-col"
-                >
-                  <span className="relative block aspect-[16/10] bg-charcoal">
-                    <Image
-                      src={modelImages[model.slug].src}
-                      alt={modelImages[model.slug].alt}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, 50vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
-                  </span>
-                  <span className="flex flex-1 flex-col p-4">
-                    <span className="font-serif text-2xl group-hover:text-rosso">
-                      {model.name}
-                    </span>
-                    <span className="mt-1 text-xs font-semibold text-accent-gold">
-                      {model.years} · {model.body}
-                    </span>
-                    <span className="mt-2 line-clamp-2 text-sm text-ink-muted">
-                      {model.intro}
-                    </span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="section-pad">
-        <div className="container-page grid gap-8 lg:grid-cols-2">
-          <div className="rounded-xl border border-border bg-surface p-8 shadow-[var(--shadow-card)]">
-            <h2 className="text-2xl">Τι περιλαμβάνει ο κατάλογος</h2>
-            <p className="prose-body mt-4">
-              Φανοποιία, μηχανικά και ηλεκτρικά για Alfa Romeo, μαζί με Fiat
-              και Lancia. Οι τιμές είναι αυτές του car.gr — χωρίς «κρυφές»
-              προσφορές. Αν μια αγγελία φύγει, το κομμάτι έχει πουληθεί.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/alfa-romeo" className="btn btn-primary">
-                Alfa Romeo
-              </Link>
-              <Link href="/fiat" className="btn btn-secondary">
-                Fiat
-              </Link>
-              <Link href="/lancia" className="btn btn-secondary">
-                Lancia
-              </Link>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="max-w-2xl">
+              <h2 className="text-4xl text-ink md:text-5xl">Μοντέλα Alfa Romeo</h2>
+              <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-muted">
+                Ανοίξτε το μοντέλο για να δείτε τι να πείτε στο τηλέφωνο. Τα
+                διαθέσιμα κομμάτια είναι στον κατάλογο.
+              </p>
             </div>
+            <Link
+              href="/alfa-romeo"
+              className="text-sm font-semibold text-rosso underline decoration-rosso/40 underline-offset-4 hover:decoration-rosso"
+            >
+              Όλα τα μοντέλα Alfa
+            </Link>
           </div>
-          <div className="rounded-xl border border-rosso/20 bg-rosso/[0.04] p-8">
-            <h2 className="text-2xl">Πριν καλέσετε</h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-ink-muted">
-              <li>Μοντέλο, έτος και αμάξωμα (σεντάν, Sportwagon, τρίθυρο).</li>
-              <li>Κινητήρας — ιδίως σε 159, 156, Giulia και Stelvio.</li>
-              <li>Εργοστασιακός κωδικός, αν τον έχει δώσει συνεργείο.</li>
-              <li>Φωτογραφία του σημείου, για εξωτερικά κομμάτια.</li>
-            </ul>
-            <p className="mt-6 text-sm text-ink-muted">
-              <strong className="text-ink">{site.phoneDisplay}</strong>
-              <br />
-              {addressLine}
-            </p>
-          </div>
+          <nav
+            aria-label="Μοντέλα Alfa Romeo"
+            className="mt-10 grid grid-cols-2 border-t border-l border-border sm:grid-cols-5"
+          >
+            {alfaModels.map((model) => (
+              <Link
+                key={model.slug}
+                href={`/alfa-romeo/${model.slug}`}
+                className="border-b border-r border-border px-3 py-4 hover:text-rosso"
+              >
+                <span className="block font-display text-2xl font-bold tracking-tight sm:text-3xl">
+                  {model.name}
+                </span>
+                <span className="mt-1 block text-sm text-ink-muted">
+                  {model.years}
+                </span>
+              </Link>
+            ))}
+          </nav>
         </div>
       </section>
 
-      <section className="section-pad border-t border-border bg-surface">
+      <section id="store" className="section-pad scroll-mt-24 border-b border-border">
         <div className="container-page max-w-3xl">
-          <SectionHeading
-            eyebrow="Συχνές ερωτήσεις"
-            title="FAQ — ανταλλακτικά Alfa Romeo Θεσσαλονίκη"
-          />
-          <dl className="mt-8 divide-y divide-border">
+          <h2 className="text-4xl md:text-5xl">Αν δεν είναι στον κατάλογο</h2>
+          <p className="prose-body mt-4">
+            Καλέστε ή στείλτε μήνυμα. Χρειάζεται μοντέλο, έτος και αμάξωμα
+            (σεντάν, Sportwagon, τρίθυρο), κινητήρας — ιδίως σε 159, 156, Giulia
+            και Stelvio — και εργοστασιακός κωδικός αν τον έχει δώσει
+            συνεργείο. Για εξωτερικά κομμάτια βοηθάει φωτογραφία του σημείου.
+          </p>
+          <p className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a
+              href={`tel:${site.phoneTel}`}
+              className="font-display text-3xl font-bold tracking-tight text-ink hover:text-rosso"
+            >
+              {site.phoneDisplay}
+            </a>
+            <a
+              href={site.whatsapp}
+              className="text-sm font-semibold text-rosso underline decoration-rosso/40 underline-offset-4 hover:decoration-rosso"
+            >
+              WhatsApp
+            </a>
+          </p>
+          <p className="mt-3 text-sm text-ink-muted">
+            <Link
+              href="/epikoinonia"
+              className="underline-offset-2 hover:text-rosso hover:underline"
+            >
+              {addressLine}
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      <section className="section-pad scroll-mt-24 bg-surface">
+        <div className="container-page max-w-3xl">
+          <h2 className="text-4xl text-ink md:text-5xl">Συχνές ερωτήσεις</h2>
+          <div className="mt-8 border-t border-border">
             {homeFaq.map((item) => (
-              <div key={item.question} className="py-5">
-                <dt className="text-lg font-semibold text-ink">
+              <details
+                key={item.question}
+                className="group border-b border-border"
+              >
+                <summary className="flex cursor-pointer list-none items-baseline justify-between gap-4 py-5 text-lg font-semibold leading-snug text-ink marker:content-none [&::-webkit-details-marker]:hidden">
                   {item.question}
-                </dt>
-                <dd className="mt-2 text-sm leading-relaxed text-ink-muted">
+                  <span
+                    className="shrink-0 font-display text-3xl leading-none font-normal text-ink-muted group-open:hidden"
+                    aria-hidden
+                  >
+                    +
+                  </span>
+                  <span
+                    className="hidden shrink-0 font-display text-3xl leading-none font-normal text-ink-muted group-open:inline"
+                    aria-hidden
+                  >
+                    −
+                  </span>
+                </summary>
+                <p className="pb-5 text-sm leading-relaxed text-ink-muted">
                   {item.answer}
-                </dd>
-              </div>
+                </p>
+              </details>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 

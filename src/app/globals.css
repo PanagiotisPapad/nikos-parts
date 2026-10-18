@@ -1,44 +1,63 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-manrope);
-  --font-serif: var(--font-source-serif);
+  --font-sans: var(--font-sofia);
+  --font-display: var(--font-sofia-condensed);
+  --font-serif: var(--font-sofia-condensed);
 
-  --color-ink: #1a1814;
-  --color-ink-muted: #5a554d;
-  --color-charcoal: #121110;
-  --color-cream: #f5f1ea;
-  --color-cream-muted: #e8e2d8;
-  --color-surface: #ffffff;
-  --color-surface-muted: #f7f6f3;
-  --color-border: #e6e1d9;
-  --color-border-strong: #cfc8bc;
-  --color-rosso: #9b1c2e;
-  --color-rosso-hover: #751422;
-  --color-rosso-light: #e8c4c0;
-  --color-accent-gold: #8a7344;
+  --color-ink: #15191d;
+  --color-ink-muted: #5a6168;
+  --color-charcoal: #101418;
+  --color-cream: #eef1f3;
+  --color-cream-muted: #d8dce0;
+  --color-surface: #f7f8fa;
+  --color-surface-muted: #e6e8eb;
+  --color-border: #cfd4d9;
+  --color-border-strong: #a8afb6;
+  --color-rosso: #c4002a;
+  --color-rosso-hover: #9b0022;
+  --color-rosso-light: #e8a0a8;
+  --color-accent-gold: #5c656e;
 
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
 
-  --shadow-card: 0 1px 2px rgb(26 24 20 / 0.04), 0 8px 24px rgb(26 24 20 / 0.06);
-  --shadow-card-hover: 0 4px 12px rgb(26 24 20 / 0.08), 0 16px 40px rgb(26 24 20 / 0.1);
+  --shadow-card: none;
+  --shadow-card-hover: none;
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+::selection {
+  background: var(--color-rosso);
+  color: #fff;
 }
 
 body {
   background: var(--color-surface-muted);
   color: var(--color-ink);
   font-family: var(--font-sans), system-ui, sans-serif;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--font-serif), Georgia, serif;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--color-rosso);
+  outline-offset: 3px;
 }
 
 @keyframes menu-rise {
@@ -64,23 +83,19 @@ h3 {
 
 @layer components {
   .container-page {
-    @apply mx-auto max-w-6xl px-4;
+    @apply mx-auto max-w-7xl px-4;
   }
 
   .section-pad {
-    @apply py-14 md:py-16;
+    @apply py-14 md:py-20;
   }
 
   .card {
-    @apply overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-card)] transition-shadow duration-200;
-  }
-
-  .card:hover {
-    box-shadow: var(--shadow-card-hover);
+    @apply overflow-hidden rounded-sm border border-border bg-surface;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-semibold transition-colors duration-150;
+    @apply inline-flex items-center justify-center rounded-sm px-5 py-3 text-sm font-semibold transition-colors duration-150;
   }
 
   .btn-primary {
@@ -92,11 +107,11 @@ h3 {
   }
 
   .btn-on-dark {
-    @apply border border-cream/30 bg-transparent text-cream hover:border-cream hover:bg-cream/10;
+    @apply border border-cream/35 bg-transparent text-cream hover:border-cream hover:bg-cream/10;
   }
 
   .badge {
-    @apply inline-flex items-center rounded-full border border-border bg-surface/90 px-3 py-1 text-xs font-semibold text-ink backdrop-blur-sm;
+    @apply inline-flex items-center rounded-sm border border-border bg-surface px-3 py-1 text-xs font-semibold text-ink;
   }
 
   .prose-body {

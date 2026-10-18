@@ -5,9 +5,9 @@ import { PageHeader } from "@/components/page-header";
 import { pageMetadata } from "@/lib/seo";
 import { addressLine, site } from "@/lib/site";
 
-const title = "Επικοινωνία — Nikos Alfa Parts Καλαμαριά";
+const title = "Επικοινωνία Καλαμαριά";
 const description =
-  "Nikos Alfa Romeo Parts, Μεσολογγίου 3, Καλαμαριά, Θεσσαλονίκη 55133. Τηλ. 698 986 8665, email, WhatsApp. Παραλαβή ανταλλακτικών Alfa Romeo.";
+  "Nikos Alfa Parts, Μεσολογγίου 3, Καλαμαριά, Θεσσαλονίκη 55133. Ανταλλακτικά Alfa Romeo, Fiat και Lancia. Τηλ. 698 986 8665, email, WhatsApp.";
 
 const mapSrc =
   "https://maps.google.com/maps?q=Mesologiou%203%20Kalamaria%20Thessaloniki%2055133&z=16&output=embed";
@@ -35,8 +35,8 @@ export default function ContactPage() {
       <PageHeader
         breadcrumbs={breadcrumbs}
         eyebrow="Καλαμαριά"
-        title="Επικοινωνία για ανταλλακτικά Alfa Romeo"
-        lede="Καλέστε ή στείλτε μήνυμα με μοντέλο, έτος και το κομμάτι που ψάχνετε. Η παραλαβή γίνεται από το κατάστημα στη Μεσολογγίου 3."
+        title="Επικοινωνία"
+        lede="Καλέστε ή στείλτε μήνυμα για ανταλλακτικά Alfa Romeo, Fiat ή Lancia. Πείτε μοντέλο, έτος και το κομμάτι που ψάχνετε. Η παραλαβή γίνεται από το κατάστημα στη Μεσολογγίου 3."
         image="/images/part-mito-wheels.jpg"
         imageAlt="Ζάντες Alfa Romeo MiTo 16 ιντσών από τον κατάλογο"
       />
@@ -51,7 +51,10 @@ export default function ContactPage() {
           />
         </div>
         <address className="card p-6 text-base leading-8 not-italic">
-          <p className="font-serif text-3xl text-ink">Nikos Alfa Romeo Parts</p>
+          <p className="font-display text-4xl font-extrabold tracking-tight text-ink">
+            Nikos
+          </p>
+          <p className="mt-1 text-sm text-ink-muted">Alfa Parts</p>
           <p className="mt-4 text-ink-muted">{addressLine}</p>
           <p className="text-ink-muted">{site.address.region}</p>
           <p className="mt-4">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Source_Serif_4 } from "next/font/google";
+import { Sofia_Sans, Sofia_Sans_Extra_Condensed } from "next/font/google";
 import { SiteGraphJsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeaderShell } from "@/components/site-header-shell";
@@ -7,15 +7,15 @@ import { OG_DEFAULT } from "@/lib/seo";
 import { defaultDescription, defaultTitle, site } from "@/lib/site";
 import "./globals.css";
 
-const sans = Manrope({
-  subsets: ["latin", "greek"],
-  variable: "--font-manrope",
+const sans = Sofia_Sans({
+  subsets: ["latin", "latin-ext", "greek"],
+  variable: "--font-sofia",
   display: "swap",
 });
 
-const serif = Source_Serif_4({
-  subsets: ["latin", "greek"],
-  variable: "--font-source-serif",
+const display = Sofia_Sans_Extra_Condensed({
+  subsets: ["latin", "latin-ext", "greek"],
+  variable: "--font-sofia-condensed",
   display: "swap",
 });
 
@@ -74,7 +74,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="el-GR"
-      className={`${sans.variable} ${serif.variable} h-full antialiased`}
+      className={`${sans.variable} ${display.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body
@@ -84,7 +84,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteGraphJsonLd />
         <a
           href="#content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:px-3 focus:py-2"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-surface focus:px-3 focus:py-2"
         >
           Μετάβαση στο περιεχόμενο
         </a>

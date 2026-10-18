@@ -7,7 +7,7 @@ import { site } from "@/lib/site";
 
 const title = "Ανταλλακτικά Fiat και Lancia Θεσσαλονίκη";
 const description =
-  "Μεταχειρισμένα ανταλλακτικά Fiat και Lancia από τον Nikos στην Καλαμαριά. Ξεχωριστοί ζωντανοί κατάλογοι από το car.gr. Τηλ. 698 986 8665.";
+  "Μεταχειρισμένα ανταλλακτικά Fiat και Lancia στη Θεσσαλονίκη, από τον Nikos στην Καλαμαριά. Ξεχωριστοί ζωντανοί κατάλογοι από το car.gr. Τηλ. 698 986 8665.";
 
 export const metadata = pageMetadata({
   title,
@@ -46,7 +46,7 @@ export default function FiatLanciaPage() {
         breadcrumbs={breadcrumbs}
         eyebrow="Fiat και Lancia"
         title="Μεταχειρισμένα ανταλλακτικά Fiat και Lancia"
-        lede="Το βάρος του καταστήματος είναι η Alfa Romeo. Fiat και Lancia έχουν δικό τους ζωντανό κατάλογο, από τις ίδιες αγγελίες στο car.gr."
+        lede="Fiat και Lancia έχουν δικό τους ζωντανό κατάλογο, από τις ίδιες αγγελίες στο car.gr."
         image="/images/part-panda-radio.jpg"
         imageAlt="Ραδιόφωνο CD Fiat Panda από τον κατάλογο"
       />

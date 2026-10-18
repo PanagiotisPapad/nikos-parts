@@ -7,7 +7,6 @@ import { createPortal } from "react-dom";
 import { site } from "@/lib/site";
 
 const links = [
-  { href: "/", label: "Αρχική" },
   { href: "/antallaktika", label: "Κατάλογος" },
   { href: "/alfa-romeo", label: "Alfa Romeo" },
   { href: "/fiat", label: "Fiat" },
@@ -18,6 +17,26 @@ const links = [
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function BrandMark({ onClick }: { onClick?: () => void }) {
+  return (
+    <Link
+      href="/"
+      onClick={onClick}
+      className="flex min-w-0 items-stretch gap-2.5"
+    >
+      <span className="w-1.5 shrink-0 bg-rosso" aria-hidden />
+      <span className="min-w-0 py-0.5">
+        <span className="block truncate font-display text-[1.7rem] font-extrabold leading-none tracking-tight">
+          Nikos
+        </span>
+        <span className="mt-0.5 block truncate text-[11px] font-medium text-cream/65">
+          Alfa Parts, Καλαμαριά
+        </span>
+      </span>
+    </Link>
+  );
 }
 
 function MenuIcon() {
@@ -125,29 +144,10 @@ export function SiteHeader() {
               }`}
             >
               <div className="flex items-center justify-between border-b border-white/10 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
-                <Link
-                  href="/"
-                  onClick={closeMenu}
-                  className="flex min-w-0 items-center gap-3"
-                >
-                  <span
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-rosso font-serif text-lg font-bold text-white"
-                    aria-hidden
-                  >
-                    N
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block truncate font-serif text-xl leading-tight tracking-tight">
-                      Nikos Alfa Parts
-                    </span>
-                    <span className="block truncate text-[11px] font-medium text-cream/70">
-                      Μεταχειρισμένα ανταλλακτικά · Καλαμαριά
-                    </span>
-                  </span>
-                </Link>
+                <BrandMark onClick={closeMenu} />
                 <button
                   type="button"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-cream hover:bg-white/10"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-sm text-cream hover:bg-white/10"
                   aria-label="Κλείσιμο μενού"
                   onClick={() => {
                     closeMenu();
@@ -171,10 +171,10 @@ export function SiteHeader() {
                       aria-current={active ? "page" : undefined}
                       onClick={closeMenu}
                       style={{ animationDelay: `${70 + index * 45}ms` }}
-                      className={`menu-link rounded-xl px-4 py-4 text-2xl font-semibold transition-colors ${
+                      className={`menu-link px-1 py-3 font-display text-4xl font-extrabold tracking-tight transition-colors ${
                         active
-                          ? "bg-rosso text-white"
-                          : "text-cream hover:bg-white/10"
+                          ? "text-rosso"
+                          : "text-cream hover:text-white"
                       }`}
                     >
                       {link.label}
@@ -208,23 +208,8 @@ export function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-white/10 bg-charcoal/95 text-cream backdrop-blur-md">
-        <div className="container-page flex items-center justify-between gap-3 py-3 md:py-4">
-          <Link href="/" className="group flex min-w-0 items-center gap-3">
-            <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-rosso font-serif text-lg font-bold text-white"
-              aria-hidden
-            >
-              N
-            </span>
-            <span className="min-w-0">
-              <span className="block truncate font-serif text-xl leading-tight tracking-tight">
-                Nikos Alfa Parts
-              </span>
-              <span className="block truncate text-[11px] font-medium text-cream/70">
-                Μεταχειρισμένα ανταλλακτικά · Καλαμαριά
-              </span>
-            </span>
-          </Link>
+        <div className="container-page flex items-center justify-between gap-3 py-3 md:py-3.5">
+          <BrandMark />
 
           <nav aria-label="Κύρια" className="hidden items-center gap-1 md:flex">
             {links.map((link) => {
@@ -234,10 +219,10 @@ export function SiteHeader() {
                   key={link.href}
                   href={link.href}
                   aria-current={active ? "page" : undefined}
-                  className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                  className={`px-3 py-2 text-sm font-semibold transition-colors ${
                     active
-                      ? "bg-rosso text-white"
-                      : "text-cream/90 hover:bg-white/10 hover:text-white"
+                      ? "text-rosso"
+                      : "text-cream/85 hover:text-white"
                   }`}
                 >
                   {link.label}
@@ -263,7 +248,7 @@ export function SiteHeader() {
             <button
               type="button"
               ref={menuButtonRef}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 text-cream hover:bg-white/10 md:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-white/15 text-cream hover:bg-white/10 md:hidden"
               aria-expanded={menuOpen}
               aria-controls={menuId}
               aria-label={menuOpen ? "Κλείσιμο μενού" : "Άνοιγμα μενού"}

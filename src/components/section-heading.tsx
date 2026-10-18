@@ -15,9 +15,7 @@ export function SectionHeading({
     <div className="flex flex-wrap items-end justify-between gap-4">
       <div className="max-w-2xl">
         {eyebrow ? (
-          <p className="text-xs font-semibold tracking-[0.16em] text-rosso uppercase">
-            {eyebrow}
-          </p>
+          <p className="text-sm text-ink-muted">{eyebrow}</p>
         ) : null}
         <h2 className="mt-1 text-3xl text-ink md:text-4xl">{title}</h2>
         {description ? (

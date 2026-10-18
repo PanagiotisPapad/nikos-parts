@@ -1,5 +1,5 @@
 export const site = {
-  name: "Nikos Alfa Romeo Parts",
+  name: "Nikos Alfa Parts",
   shortName: "Nikos",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   phoneDisplay: "698 986 8665",
@@ -22,13 +22,14 @@ export const site = {
 export const addressLine = `${site.address.street}, ${site.address.locality}, ${site.address.postalCode}`;
 
 /** Home & default `<title>` (layout template adds `| Nikos Alfa Parts`). */
-export const defaultTitle = "Ανταλλακτικά Alfa Romeo Θεσσαλονίκη";
+export const defaultTitle =
+  "Ανταλλακτικά Alfa Romeo, Fiat και Lancia Θεσσαλονίκη";
 
 /** Full home title tag (no template suffix). */
 export const homeTitleAbsolute = `${defaultTitle} | Nikos · Καλαμαριά`;
 
 export const defaultDescription =
-  "Μεταχειρισμένα ανταλλακτικά Alfa Romeo στην Καλαμαριά, Θεσσαλονίκη. Ζωντανός κατάλογος car.gr, παραλαβή Μεσολογγίου 3. MiTo, Giulietta, 159, Giulia. Τηλ. 698 986 8665.";
+  "Μεταχειρισμένα ανταλλακτικά Alfa Romeo, Fiat και Lancia στην Καλαμαριά, Θεσσαλονίκη. Ζωντανός κατάλογος car.gr, παραλαβή Μεσολογγίου 3. Τηλ. 698 986 8665.";
 
 export function absoluteUrl(path = "/") {
   return new URL(path, site.url).toString();
